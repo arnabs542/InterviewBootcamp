@@ -1,0 +1,18 @@
+1. Before you begin, make sure you understand every detail of the problem and the desired solution. 
+What will be the method signature? Are you allowed to mutate the inputs? 
+Are there any specific constraints on the time or space complexity?
+2. Set a timer.
+3. Maintain a growth mindset. 
+Say to yourself: My intelligence is not being tested. I'm making friends with this problem. I'm learning. 
+I'm having fun.
+4. Slow down to speed up.
+5. Always be working a concrete example.
+6. Before you dive in, come up with as many edge cases as you can think of.
+7. When unsure where to go, start with a brute-force solution.
+8. When you think you have a solution, walk through it with some example inputs and analyze the time/space 
+complexity.
+9. Even when you have a satisfactory solution, you can still continue to deepen your understanding of the 
+problem. Are there other ways to solve it, and if so, how do the solutions compare? Work on harder variants, 
+probabilities, and possible optimizations.
+10.Be crystal clear on your proposed algorithm, and be certain it will work, BEFORE you start writing any code. 
+(because writing any code without fully knowing what you're doing is game over in an interview)
