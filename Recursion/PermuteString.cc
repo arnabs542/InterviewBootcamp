@@ -30,7 +30,7 @@ int permuteStringWrapper(string& str)
 
 int main(int argc, char** argv)
 {
-  string str = "aaa";
+  string str = "ab";
   permuteStringWrapper(str);
   return 0;
 }
