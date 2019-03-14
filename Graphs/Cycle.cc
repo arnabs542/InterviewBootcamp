@@ -5,7 +5,7 @@ Given a directed graph check whether there is a cycle in it
 Solution Summary : Do a DFS on each node in the graph. Maintain a visited set.
 This keeps a global account of nodes we've seen so far. For every node maintain
 a set of nodes called path, which keeps account of the nodes we've seen while
-doing DFS on this node. If we see a node again in ptah while doing DFS, we've
+doing DFS on this node. If we see a node again in path while doing DFS, we've
 found a cycle.
 */
 
@@ -37,6 +37,7 @@ bool hasCycleHelper(Graph& g, int node, set<int>& visited, set<int>& path)
       return true;
   }
 
+  path.erase(node);
   return false;
 }
 

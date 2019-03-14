@@ -8,58 +8,60 @@ Comments :
 
 using namespace std;
 
-void printArr(const vector<int>& vect)
+void swap(vector<int>& array, int i, int j)
 {
-  cout << "vector" << endl;
-
-  for (auto v : vect)
-    cout << v;
-  cout << endl;
+  int tmp = array[i];
+  array[i] = array[j];
+  array[j] = tmp;
 }
 
-void swap(vector<int>& arr, int i, int j)
+int partition(vector<int>& array, int left, int right)
 {
-  assert(i < arr.size() && j < arr.size());
+  int pivot = array[right];
+  int pivotIndex = right;
+  --right;
 
-  int tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
-}
-
-int partition(vector<int>& arr, int start, int end)
-{
-  int pivot = arr[start];
-  int left = start+1;
-  int right = end;
-
-  while (left < right)
+  while (left <= right)
   {
-    if (arr[left] < pivot)
+    if (array[left] <= pivot)
+    {
       ++left;
-    if (arr[right] > pivot)
+    }
+    else
+    {
+      swap(array, left, right);
       --right;
-    if (arr[left] > arr[right]) swap(arr, left, right);
+    }
   }
 
-  swap(arr, start, left);
-  return start;
+  swap(array, left, pivotIndex);
+  return left;
 }
 
-void quickSort(vector<int>& arr, int i, int j)
+void quickSortHelper(vector<int>& array, int left, int right)
 {
-  if (i >= j)
+  if (left >= right)
     return;
 
-  int pivotPosition = partition(arr, i, j);
-  printArr(arr);
-  quickSort(arr, i, pivotPosition-1);
-  quickSort(arr, pivotPosition+1, j);
+  int pivot = partition(array, left, right);
+  quickSortHelper(array, left, pivot-1);
+  quickSortHelper(array, pivot+1, right);
 }
 
-int main(int argc, char** argv)
+
+void quicksort(vector<int>& array)
 {
-  vector<int> arr = {4, 1, 5};
-  quickSort(arr, 0, arr.size()-1);
+  quickSortHelper(array, 0, array.size()-1);
+}
+
+int main()
+{
+  vector<int> array = {6, 5, 10,5, 7, 6, 3, 1, 4, 6, 2, 9, 8};
+  quicksort(array);
+
+  for (auto n:array)
+    cout << n << " ";
+  cout << endl;
+
   return 0;
 }
-

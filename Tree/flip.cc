@@ -48,7 +48,8 @@ void printTree(TreeNode* root)
     cout << endl;
 
     q.pop();
-    q.push(nullptr);
+    if (!q.empty())
+      q.push(nullptr);
   }
 }
 

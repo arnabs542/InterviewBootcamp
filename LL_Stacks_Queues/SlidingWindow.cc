@@ -30,6 +30,13 @@ void slidingWindowMaxHeap(int windowSize, const vector<int>& input, vector<int>&
   result.push_back(heap.top().first);
 }
 
+// The idea is to have the largest element always in the front of the deque.
+// Always insert new elements at the end, so the oldest elements are always at
+// the front of the queue. The newer elements are at the back of the queue
+// Before inserting each new element, check all elements at the back if the
+// queue that are smaller, these are not required and can be removed
+// Also check all old elements (front of queue) which are older than window size
+// can also be removed from the front
 void slidingWindowMaxDeque(int windowSize, const vector<int>& input,
                            vector<int>& result)
 {

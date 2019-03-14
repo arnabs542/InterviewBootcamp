@@ -4,6 +4,7 @@ Comments :
 
 #include <iostream>
 #include <stack>
+#include <exception>
 
 using namespace std;
 
@@ -18,11 +19,20 @@ struct Node
 class treeIterator
 {
  public:
-  treeIterator(Node* root) : node(root) {}
+  treeIterator(Node* root) 
+  {
+    pushAll(root);
+  }
+
   int next();
   bool hasNext();
 
  private:
+  void pushAll(Node* node)
+  {
+    for (; node ; s.push(node), node = node->left);
+  }
+
   Node*        node;
   stack<Node*> s;
 };
@@ -32,30 +42,17 @@ int treeIterator::next()
 {
   Node* n = nullptr;
 
-  if (s.empty())
-    n = node;
-  else
-    n = s.top();
+   if (s.empty())
+     throw runtime_error("invalid next call on treeIterator");
 
-  while (n && n->left)
-  {
-    s.push(n);
-    n = n->left;
-  }
-
-  if (!s.empty() && n == s.top() && n->right)
-  {
-    s.push(n->right);
-    s.pop();
-  }
-
-  if (!n) exit(1);
+   n = s.top(); s.pop();
+   pushAll(n->right);
   return n->val;
 }
 
 bool treeIterator::hasNext()
 {
-  return !s.empty() || node;
+  return !s.empty();
 }
 
 Node* createTree()
@@ -76,9 +73,8 @@ int main(int argc, char** argv)
   Node *root = createTree();
   treeIterator it(root);
 
-  if (it.hasNext())
-    cout << it.next();
-  cout << endl;
+  while (it.hasNext())
+    cout << it.next() << endl;
   return 0;
 }
 

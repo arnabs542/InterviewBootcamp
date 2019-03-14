@@ -12,6 +12,7 @@ number of moves that the knight can take to get to the target location.
 #include <queue>
 #include <vector>
 #include <set>
+#include <limits>
 
 using namespace std;
 
@@ -69,10 +70,41 @@ int minimumMoves(int rows, int cols, int startx, int starty, int endx, int endy)
   return count;
 }
 
+int minimumMovesDjk(int rows, int cols, int startx, int starty, int endx, int
+                    endy)
+{
+  priority_queue<pair<int, Position> > pq;
+  vector<vector<int> > board(rows, vector<int>(cols, numeric_limits<int>::max()));
+  
+  pq.push(make_pair(0, Position(starty, startx)));
+
+  while (!pq.empty())
+  {
+    Position p = pq.top().second;
+    int r = p.first; int c = p.second;
+
+    int len = pq.top().first;
+    pq.pop();
+    vector<Position> n;
+    getNeighbors(p, rows, cols, n);
+
+    for (auto const& pos : n)
+    {
+      if (board[pos.first][pos.second] > len + 1)
+      {
+        board[pos.first][pos.second] = len+1;
+        pq.push(make_pair(len+1, pos));
+      }
+    }
+  }
+
+  return board[endy][endx];
+}
+
 
 int main()
 {
-  cout << minimumMoves(64, 64, 4, 3, 56, 56) << endl;
+  cout << minimumMovesDjk(8, 8, 0, 0, 7, 7) << endl;
   return 0;
 }
 

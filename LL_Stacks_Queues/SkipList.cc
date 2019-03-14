@@ -54,7 +54,7 @@ void SkipList::insert(int val)
     m_levels = level+1;
 
   // create node
-  Node *newNode = new Node(val, level);
+  Node *newNode = new Node(val, m_levels);
   // actually insert the node starting from level 0
   Node* curr = m_head;
 
@@ -138,9 +138,12 @@ int main(int argc, char** argv)
 {
   srand(time(0));
   SkipList sl;
-  sl.insert(5);
-  cout << sl.exists(5) << endl;
-  sl.insert(4);
+
+  for (auto i : {1,3,5,6,7,7,8,19,21,33,45})
+    sl.insert(i);
+  sl.enumerate();
+  for (auto i : {1,3,5,6,7,7,8,19,21,33,45})
+    sl.erase(i);
   sl.enumerate();
   return 0;
 }
